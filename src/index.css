@@ -37,8 +37,14 @@ body {
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: transform 0.1s, width 0.2s, height 0.2s;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   mix-blend-mode: screen;
+  will-change: transform;
+}
+
+#cursor.active {
+  width: 20px;
+  height: 20px;
 }
 
 #cursor-ring {
@@ -50,8 +56,16 @@ body {
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
-  transition: transform 0.12s ease, width 0.3s, height 0.3s, border-color 0.3s;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform;
 }
+
+#cursor-ring.active {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(249, 180, 196, 0.8);
+}
+
 
 /* ─── OPENING CURTAIN ─── */
 #curtain {
@@ -183,102 +197,17 @@ body {
   }
 }
 
-/* ─── STARS ─── */
-#stars {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
+/* ─── STARS & PETALS ─── */
+/* Handled via Canvas for performance */
 
-.star {
-  position: absolute;
-  border-radius: 50%;
-  background: #fff;
-  animation: twinkle var(--d) ease-in-out infinite alternate;
-}
-
-.star.gold {
-  background: #f0c060;
-}
-
-@keyframes twinkle {
-  from {
-    opacity: var(--a1);
-    transform: scale(1);
-  }
-
-  to {
-    opacity: var(--a2);
-    transform: scale(1.6);
-    box-shadow: 0 0 4px currentColor;
-  }
-}
 
 /* ─── PETALS ─── */
-#petals {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  overflow: hidden;
-}
+/* Handled via Canvas for performance */
 
-.petal {
-  position: absolute;
-  top: -80px;
-  opacity: 0;
-  animation: fall3d var(--fd) cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--fd-delay) infinite;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-@keyframes fall3d {
-  0% {
-    transform: translateY(0) rotate3d(1, 1, 0, 0deg) translateX(0);
-    opacity: 0;
-  }
-
-  8% {
-    opacity: 0.8;
-  }
-
-  50% {
-    transform: translateY(50vh) rotate3d(1, 1, 1, 180deg) translateX(var(--drift));
-    opacity: 0.6;
-  }
-
-  90% {
-    opacity: 0.3;
-  }
-
-  100% {
-    transform: translateY(115vh) rotate3d(0, 1, 1, 360deg) translateX(calc(var(--drift)*2));
-    opacity: 0;
-  }
-}
 
 /* ─── MOUSE SPARKLES ─── */
-.sparkle-dot {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9997;
-  animation: sparkleFade var(--sp-d) ease-out forwards;
-  transform: translate(-50%, -50%);
-}
+/* Handled via Canvas for performance */
 
-@keyframes sparkleFade {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(calc(-50% + var(--sx)), calc(-50% + var(--sy))) scale(0);
-    opacity: 0;
-  }
-}
 
 /* ─── MAIN CONTAINER ─── */
 .container {
@@ -1019,35 +948,8 @@ body {
 }
 
 /* ─── HEARTS BURST ─── */
-.hearts-burst {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 4999;
-}
+/* Handled via Canvas for performance */
 
-.burst-heart {
-  position: absolute;
-  opacity: 0;
-  animation: burst var(--bd) cubic-bezier(0.16, 1, 0.3, 1) var(--bd-delay) forwards;
-  will-change: transform;
-}
-
-@keyframes burst {
-  0% {
-    transform: translate(0, 0) scale(0) rotate(0deg);
-    opacity: 1;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(var(--bx), var(--by)) scale(1.4) rotate(var(--br));
-    opacity: 0;
-  }
-}
 
 /* ─── SCROLL REVEAL ─── */
 .scroll-reveal {

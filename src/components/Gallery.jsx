@@ -35,7 +35,7 @@ const Gallery = () => {
       <div className="gallery-grid">
         {memories.map((photo, i) => (
           <div key={i} className="gallery-item" onClick={() => openLightbox(i)}>
-            <img src={photo.src} alt={`Story ${i + 1}`} />
+            <img src={photo.src} alt={`Story ${i + 1}`} loading="lazy" />
             <div className="gallery-overlay">
               <span className="overlay-caption">{photo.caption}</span>
             </div>

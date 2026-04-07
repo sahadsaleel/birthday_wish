@@ -4,15 +4,24 @@ const BirthdayCard = ({ onReveal }) => {
   const cardRef = useRef(null);
   const [isRevealed, setIsRevealed] = useState(false);
 
+  const requestRef = useRef();
+  
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     const r = cardRef.current.getBoundingClientRect();
     const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
     const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
-    cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg) scale(1.01)`;
+    
+    cancelAnimationFrame(requestRef.current);
+    requestRef.current = requestAnimationFrame(() => {
+      if (cardRef.current) {
+        cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg) scale(1.01)`;
+      }
+    });
   };
 
   const handleMouseLeave = () => {
+    cancelAnimationFrame(requestRef.current);
     if (!cardRef.current) return;
     cardRef.current.style.transform = '';
     cardRef.current.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';

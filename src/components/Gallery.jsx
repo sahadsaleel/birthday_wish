@@ -4,10 +4,10 @@ const Gallery = () => {
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
   const memories = [
-    { src: '/photos/photo1.jpeg', caption: 'Where it all started: Instagram ♡' },
-    { src: '/photos/photo2.jpeg', caption: 'Adventures together ♡' },
-    { src: '/photos/photo3.jpeg', caption: 'My favourite smile ♡' },
-    { src: '/photos/photo4.jpeg', caption: 'Always & forever ♡' },
+    { src: 'photos/photo1.jpeg', caption: 'Where it all started: Instagram ♡' },
+    { src: 'photos/photo2.jpeg', caption: 'Adventures together ♡' },
+    { src: 'photos/photo3.jpeg', caption: 'My favourite smile ♡' },
+    { src: 'photos/photo4.jpeg', caption: 'Always & forever ♡' },
   ];
 
   const openLightbox = (index) => {
